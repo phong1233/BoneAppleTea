@@ -1,8 +1,21 @@
 import requests, bs4, sys, webbrowser
 import json
+import parser
 
 keywords = ['chicken', 'onion', 'pot roast', 'egg', 'ginger', 'chocolate', 'pasta', 'garlic', 'milk', 'walnut', 'banana', 'potato', 'spinach', 'lemon', 'cod', 'zucchini', 'egg', 'oyster', 'fish', 'crabs', 'pumpkin', 'beef', 'carrot', 'blueberries', 'cheese', 'tomato', 'noodles', 'honey', 'ham', 'celery', 'pea', 'apple', 'cabbage', 'maple syrupt', 'graham crackers', 'pepper', 'avocado', 'chili beans', 'corn', 'cornmeal', 'spaghetti', 'cocoa', 'salmon', 'tuna', 'lamb', 'mushroom', 'cinnamon', 'quinoa', 'raspberries', 'strawberries', 'pork']
 
+
+def complexity(recipe):
+    complex = 0
+    steps = len(recipe['instructions'])
+    if steps <= 3:
+        complex = 1
+    elif 4 <= steps <= 6:
+        complex = 2
+    else:
+        complex = 3
+
+    recipe["complexity"] = complex
 
 def get_url(item):
     address = requests.get('https://www.allrecipes.com/search/results/'+item)
@@ -81,7 +94,12 @@ def add_keywords(keyword_file, dataset):
             new_data[recipe_id]['keywords'] = []
             for i in key_ingredients:
                 new_data[recipe_id]['keywords'].append(i)
-
+            parser.parser(new_data)
+            complexity(new_data)
+            new_data['seen'] = False
+            new_data['like'] = False
+    with open('recipe_data.json', 'w') as fp:
+        json.dump(new_data, fp, sort_keys=True, indent=4, separators=(',', ': '))
 
 
 
@@ -93,5 +111,4 @@ def is_in(word):
 
 
 if __name__ == '__main__':
-    parse_json()
-    #create_dic()
+    add_keywords('keyword_file.txt', 'new_recipe_data.json')
