@@ -17,15 +17,15 @@ cod
 zucchini
 egg
 oyster
-fish
-crabs
+crab
 pumpkin
 beef
 carrot
 blueberries
+blueberry
 cheese
 tomato
-noodles
+noodle
 honey
 ham
 celery
@@ -33,10 +33,10 @@ pea
 apple
 cabbage
 maple syrup
-graham crackers
+graham cracker
 pepper
 avocado
-chili beans
+chili bean
 corn
 cornmeal
 spaghetti
@@ -48,5 +48,98 @@ mushroom
 cinnamon
 quinoa
 raspberries
+raspberry
 strawberries
+strawberry
 pork
+chicken soup
+biscuit dough
+mushroom soup
+water
+dry onion soup mix
+brown sugar
+ketchup
+ground beef
+saltine crackers
+white sugar
+vanilla extract
+flour
+baking soda
+chocolate chips
+walnuts
+rotini
+broccoli
+bread crumb
+butter
+nutmeg
+salt
+olive oil
+chive
+vegetable oil
+chicken broth
+soy sauce
+chile-garlic sauce
+oyster sauce
+tamarind paste
+fish sauce
+palm sugar
+shallot
+cilantro
+green onion
+clove
+cauliflower
+margarine
+bacon
+beef stock
+thyme
+bay leaf
+bay leaves
+white wine
+parmesan cheese
+cheddar cheese
+mayonnaise
+basil
+tilapia
+instant vanilla pudding mix
+italian sausage
+crushed tomato
+tomato paste
+tomato sauce
+fennel seed
+italian seasoning
+parsley
+lasagna noodle
+ricotta cheese
+mozzarella cheese
+cocoa powder
+confectioners' sugar
+raisin
+caraway seed
+buttermilk
+sour cream
+chicken bouillon granule
+green pea
+celery seed
+unbaked pie crust
+white vinegar
+fudge brownie mix
+baileys
+cream
+balsamic syrup
+garlic powder
+chipotle pepper
+barbeque sauce
+worcestershire sauce
+swiss cheese
+paprika
+cornstarch
+whipping cream
+cream cheese
+cider vinegar
+chicken thigh
+lime
+bell pepper
+beer
+chili powder
+oregano
+cumin
