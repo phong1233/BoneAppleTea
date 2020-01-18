@@ -92,8 +92,8 @@ def similar_recipes():
                     break
 
 
-        with open('other_recipe_data.json', 'w') as fp:
-            json.dump(dictionary, fp, sort_keys=True, indent=4, separators=(',', ': '))
+        with open('recipe_data.json', 'w') as fp:
+            json.dump(dictionary, fp, sort_keys=False, indent=4, separators=(',', ': '))
 
 
 
