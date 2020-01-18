@@ -7,7 +7,7 @@ keywords = ['chicken', 'onion', 'pot roast', 'egg', 'ginger', 'chocolate', 'past
 def get_url(item):
     address = requests.get('https://www.allrecipes.com/search/results/'+item)
     address.raise_for_status()
-    soup = bs4.=(address.text, features="html.parser")
+    soup = bs4.BeautifulSoup(address.text, features="html.parser")
     recList = soup.find('ar-save-item')['data-imageurl']
     recipe = recList[1:]
     recipe = recipe[:-1]
@@ -17,39 +17,73 @@ def get_url(item):
 
 def parse_json():
     new_data = {}
-    count = 100
+    count = 1500
     with open('recipes_raw_nosource_ar.json') as json_file:
         data = json.load(json_file)
         recipe_id = 0
         for d in data:
-            print(d)
-            new_data[recipe_id] = data[d]
-            new_data[data[d]['title']]['picture_link'] = get_url(data[d]['title'])
-            ingredients = new_data[data[d]['title']]['ingredients']
-            new_data[data[d]['title']]['ingredients'] = []
+            try:
+                print(str(recipe_id) + " " + d)
+                new_data[recipe_id] = data[d]
+                new_data[recipe_id]['picture_link'] = get_url(data[d]['title'])
+                ingredients = new_data[recipe_id]['ingredients']
+                new_data[recipe_id]['ingredients'] = []
+                '''c = 0
+                l = len(ingredients)
+                key_ingredients = []
+                for item in ingredients:
+                    if_in = is_in(item)
+                    if if_in != 'nothing':
+                        if if_in not in key_ingredients:
+                            key_ingredients.append(if_in)
+                    new_data[recipe_id]['ingredients'].append(item.replace(' ADVERTISEMENT', ''))
+                    c += 1
+                    if c == l - 1:
+                        break
+                new_data[recipe_id]['keywords'] = []
+                for i in key_ingredients:
+                    new_data[recipe_id]['keywords'].append(i)'''
+
+                if count == 0:
+                    break
+                count -= 1
+                recipe_id += 1
+            except Exception:
+                recipe_id -= 1
+                new_data.pop(recipe_id)
+
+    with open('new_recipe_data.json', 'w') as fp:
+        json.dump(new_data, fp, sort_keys=True, indent=4, separators=(',', ': '))
+
+
+def add_keywords(keyword_file, dataset):
+    keyword_list = []
+    with open(keyword_file, 'r') as f:
+        for keyword in f:
+            if keyword not in keyword_list:
+                keyword_list.append(keyword)
+    new_data = {}
+    with open(dataset) as json_file:
+        data = json.load(json_file)
+        recipe_id = 0
+        for d in data:
+
             c = 0
-            l = len(ingredients)
+            l = len(keyword_list)
             key_ingredients = []
-            for item in ingredients:
+            for item in keyword_list:
                 if_in = is_in(item)
                 if if_in != 'nothing':
                     if if_in not in key_ingredients:
                         key_ingredients.append(if_in)
-                new_data[data[d]['title']]['ingredients'].append(item.replace(' ADVERTISEMENT', ''))
+                new_data[recipe_id]['ingredients'].append(item.replace(' ADVERTISEMENT', ''))
                 c += 1
                 if c == l - 1:
                     break
-            new_data[data[d]['title']]['keywords'] = []
+            new_data[recipe_id]['keywords'] = []
             for i in key_ingredients:
-                new_data[data[d]['title']]['keywords'].append(i)
+                new_data[recipe_id]['keywords'].append(i)
 
-            if count == 0:
-                break
-            count -= 1
-            recipe_id += 1
-
-    with open('new_recipe_data.json', 'w') as fp:
-        json.dump(new_data, fp, sort_keys=True, indent=4, separators=(',', ': '))
 
 def is_in(word):
     for i in keywords:
