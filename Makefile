@@ -1,5 +1,5 @@
 init:
-	( cd Frontend && npm install )
+	( cd UI-app && npm install )
 
 start-front:
-	( cd Frontend && npx react-native run-ios )
+	( cd UI-app && npx react-native run-ios )
