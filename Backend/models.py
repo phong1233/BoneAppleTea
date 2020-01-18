@@ -6,3 +6,5 @@ class Recipe():
         self.image = dic['image']
         self.keywords = dic['keywords']
         self.complexity = dic['complexity']
+        self.seen = dic['seen']
+        self.like = dic['like']
