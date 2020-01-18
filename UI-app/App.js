@@ -18,7 +18,7 @@ export default class Exemple extends Component {
   renderCard = (card, index) => {
     return (
       <View style={styles.card}>
-        <Text style={{textAlign:'center', fontSize:40}}>Pancake blueberry avocato</Text>
+        <Text style={{textAlign:'center', fontSize:40, borderColor:'blue', margin:20, borderWidth:2}}>Pancake blueberry avocato</Text>
         <RecipeImage/>
       </View>
     )
