@@ -1,20 +1,14 @@
 import React, { Component } from 'react'
 import RecipeContainer from './components/recipeContainer'
+import RecipeImage from './components/recipe_image'
 import Swiper from 'react-native-deck-swiper'
-import { Button, StyleSheet, Text, View } from 'react-native'
-
-// demo purposes only
-function * range (start, end) {
-  for (let i = start; i <= end; i++) {
-    yield i
-  }
-}
+import { Button, StyleSheet, Text, View, Switch } from 'react-native'
 
 export default class Exemple extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cards: [...range(1, 50)],
+      cards: [1,2,3,4,5,6],
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0
@@ -22,9 +16,22 @@ export default class Exemple extends Component {
   }
 
   renderCard = (card, index) => {
+    // let color = ''
+    // switch('1') {
+    //   case '1':
+    //     color = 'green';
+    //     break;
+    //   case '2':
+    //     color = 'yellow';
+    //     break;
+    //   default:
+    //     color = 'red';
+    // }
+    // styles.cards.backgroundColor = color;
     return (
       <View style={styles.card}>
-        <RecipeContainer/>
+        <Text style={{textAlign:'center', fontSize:40}}>Pancake blueberry avocato</Text>
+        <RecipeImage/>
       </View>
     )
   };
@@ -50,11 +57,10 @@ export default class Exemple extends Component {
           ref={swiper => {
             this.swiper = swiper
           }}
-          onSwiped={() => this.onSwiped('general')}
           onSwipedLeft={() => this.onSwiped('left')}
           onSwipedRight={() => this.onSwiped('right')}
-          // onSwipedTop={() => this.onSwiped('top')}
-          // onSwipedBottom={() => this.onSwiped('bottom')}
+          disableTopSwipe={true}
+          disableBottomSwipe={true}
           onTapCard={this.swipeLeft}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
@@ -64,22 +70,6 @@ export default class Exemple extends Component {
           stackSize={3}
           stackSeparation={15}
           overlayLabels={{
-            // bottom: {
-            //   title: 'BLEAH',
-            //   style: {
-            //     label: {
-            //       backgroundColor: 'black',
-            //       borderColor: 'black',
-            //       color: 'white',
-            //       borderWidth: 1
-            //     },
-            //     wrapper: {
-            //       flexDirection: 'column',
-            //       alignItems: 'center',
-            //       justifyContent: 'center'
-            //     }
-            //   }
-            // },
             left: {
               title: 'NOPE',
               style: {
@@ -115,23 +105,7 @@ export default class Exemple extends Component {
                   marginLeft: 30
                 }
               }
-            },
-            // top: {
-            //   title: 'SUPER LIKE',
-            //   style: {
-            //     label: {
-            //       backgroundColor: 'black',
-            //       borderColor: 'black',
-            //       color: 'white',
-            //       borderWidth: 1
-            //     },
-            //     wrapper: {
-            //       flexDirection: 'column',
-            //       alignItems: 'center',
-            //       justifyContent: 'center'
-            //     }
-            //   }
-            // }
+            }
           }}
           animateOverlayLabelsOpacity
           animateCardOpacity
@@ -151,21 +125,11 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    borderRadius: 4,
+    borderRadius: 15,
     borderWidth: 2,
     borderColor: '#E8E8E8',
     justifyContent: 'center',
-    backgroundColor: 'white'
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 50,
-    backgroundColor: 'transparent'
-  },
-  done: {
-    textAlign: 'center',
-    fontSize: 30,
-    color: 'white',
-    backgroundColor: 'transparent'
+    backgroundColor: 'white',
+    paddingTop: 100
   }
 })
