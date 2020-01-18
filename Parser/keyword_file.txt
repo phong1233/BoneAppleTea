@@ -15,7 +15,6 @@ spinach
 lemon
 cod
 zucchini
-egg
 oyster
 crab
 pumpkin
