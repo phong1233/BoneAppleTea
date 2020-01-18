@@ -24,4 +24,3 @@ def get_new_keyword():
         add_keyword(user_input)
         user_input = input("Enter new keyword: ")
 
-get_new_keyword()
