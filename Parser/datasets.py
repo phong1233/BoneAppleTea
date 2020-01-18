@@ -34,18 +34,21 @@ def parse():
     with open('keyword_file.txt', 'r') as f:
         for keyword in f:
             if keyword not in keyword_list:
-                keyword_list.append(keyword)
+                keyword_list.append(keyword.replace('\n', ''))
+        keyword_list.remove("")
     with open('new_recipe_data.json', 'r') as json_file:
         data = json.load(json_file)
         for id in range(len(data)):
+            data[str(id)]['keywords'] = []
             for item in keyword_list:
-                for ing in data[str(id)]:
+                for ing in data[str(id)]['ingredients']:
                     if item in ing:
                         data[str(id)]['keywords'].append(item)
                         break
             for ing in range(len(data[str(id)]['ingredients'])):
-                data[str(id)]['ingredients'][ing].replace(' ADVERTISEMENT', '')
+                data[str(id)]['ingredients'][ing] = data[str(id)]['ingredients'][ing].replace(' ADVERTISEMENT', '')
 
+            data[str(id)]['ingredients'].remove("ADVERTISEMENT")
             pa(data[str(id)])
             complexity(data[str(id)])
             data[str(id)]['seen'] = False
