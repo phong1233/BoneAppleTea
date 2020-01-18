@@ -7,11 +7,15 @@ def parser(recipe):
 
 
 def add_keyword(new_keyword):
-    file = open("keyword_file.txt", "a")
-    keywords
-    for keyword in keywords:
+    file = open("keyword_file.txt", "r+")
+
+    keywords = file.read()
+    keywords_list = re.split('\n', keywords)
+    for keyword in keywords_list:
         if keyword == new_keyword:
             return
-    keywords.append(new_keyword)
 
+    file.write("\n" + new_keyword)
+
+    file.close()
 
