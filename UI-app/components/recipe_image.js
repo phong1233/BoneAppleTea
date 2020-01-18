@@ -53,7 +53,7 @@ export default class RecipeImage extends Component {
                             {key: 'Jimmy'},
                             {key: 'Julie'},
                         ]}
-                        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+                        renderItem={({item}) => <Text style={{color:'black'}}>{item.key}</Text>}
                     />
                 </TouchableHighlight>
             </View>

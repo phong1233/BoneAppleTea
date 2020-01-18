@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RecipeContainer from './components/recipeContainer'
 import RecipeImage from './components/recipe_image'
 import Swiper from 'react-native-deck-swiper'
+import List from './components/recipe'
 import { Button, StyleSheet, Text, View, Switch } from 'react-native'
 
 export default class Exemple extends Component {
@@ -11,17 +12,26 @@ export default class Exemple extends Component {
       cards: [1,2,3,4,5,6],
       swipedAllCards: false,
       swipeDirection: '',
-      cardIndex: 0
+      cardIndex: 0,
+      renderRecipe: false
     }
   }
 
   renderCard = (card, index) => {
+    if (!this.state.renderRecipe){
+      return (
+        <View style={styles.card}>
+          <Text style={{textAlign:'center', fontSize:40, borderColor:'blue', margin:20, borderWidth:2}}>Pancake blueberry avocato</Text>
+          <RecipeImage/>
+        </View>
+      )
+    }
     return (
       <View style={styles.card}>
-        <Text style={{textAlign:'center', fontSize:40, borderColor:'blue', margin:20, borderWidth:2}}>Pancake blueberry avocato</Text>
-        <RecipeImage/>
+        <List />
       </View>
     )
+    
   };
 
   onSwiped = (type) => {

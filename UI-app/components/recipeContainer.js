@@ -5,7 +5,7 @@ import {View, Text, Image} from 'react-native';
 class RecipeContainer extends Component {
     render() {
         return (
-            <View style={{backgroundColor:'red'}}>
+            <View>
                 <RecipeImage/>
             </View>
         );
