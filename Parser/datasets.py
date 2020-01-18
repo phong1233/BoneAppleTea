@@ -88,6 +88,7 @@ def add_keywords(keyword_file, dataset):
                     if if_in not in key_ingredients:
                         key_ingredients.append(if_in)
                 new_data[recipe_id]['ingredients'].append(item.replace(' ADVERTISEMENT', ''))
+
                 c += 1
                 if c == l - 1:
                     break

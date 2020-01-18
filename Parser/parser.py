@@ -1,9 +1,9 @@
 import re
 
 def parser(recipe):
-       steps = recipe["ingredients"]
+       steps = recipe["instructions"]
        ingredients_array = re.split('\n', steps)
-       recipe["ingredients"] = ingredients_array
+       recipe["instructions"] = ingredients_array
 
 def add_keyword(new_keyword):
     file = open("keyword_file.txt", "r+")
@@ -23,4 +23,3 @@ def get_new_keyword():
     while user_input != "quit":
         add_keyword(user_input)
         user_input = input("Enter new keyword: ")
-
