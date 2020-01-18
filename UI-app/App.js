@@ -16,18 +16,6 @@ export default class Exemple extends Component {
   }
 
   renderCard = (card, index) => {
-    // let color = ''
-    // switch('1') {
-    //   case '1':
-    //     color = 'green';
-    //     break;
-    //   case '2':
-    //     color = 'yellow';
-    //     break;
-    //   default:
-    //     color = 'red';
-    // }
-    // styles.cards.backgroundColor = color;
     return (
       <View style={styles.card}>
         <Text style={{textAlign:'center', fontSize:40}}>Pancake blueberry avocato</Text>
