@@ -5,6 +5,9 @@ def pa(recipe):
        steps = recipe["instructions"]
        ingredients_array = re.split('\n', steps)
        recipe["instructions"] = ingredients_array
+       while "" in ingredients_array:
+           ingredients_array.remove("")
+
 
 def add_keyword(new_keyword):
     file = open("keyword_file.txt", "r+")
