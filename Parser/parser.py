@@ -1,1 +1,27 @@
-keywords = ['chicken', 'onion', 'pot roast', 'egg', 'ginger', 'chocolate', 'pasta', 'garlic', 'milk', 'walnut', 'banana', 'potato', 'spinach', 'lemon', 'cod', 'zucchini', 'egg', 'oyster', 'fish', 'crabs', 'pumpkin', 'beef', 'carrot', 'blueberries', 'cheese', 'tomato', 'noodles', 'honey', 'ham', 'celery', 'pea', 'apple', 'cabbage', 'maple syrupt', 'graham crackers', 'pepper', 'avocado', 'chili beans', 'corn', 'cornmeal', 'spaghetti', 'cocoa', 'salmon', 'tuna', 'lamb', 'mushroom', 'cinnamon', 'quinoa', 'raspberries', 'strawberries', 'pork']
+import re
+
+def parser(recipe):
+       steps = recipe["ingredients"]
+       ingredients_array = re.split('\n', steps)
+       recipe["ingredients"] = ingredients_array
+
+def add_keyword(new_keyword):
+    file = open("keyword_file.txt", "r+")
+
+    keywords = file.read()
+    keywords_list = re.split('\n', keywords)
+    for keyword in keywords_list:
+        if keyword == new_keyword:
+            return
+
+    file.write("\n" + new_keyword)
+
+    file.close()
+
+def get_new_keyword():
+    user_input = ""
+    while user_input != "quit":
+        add_keyword(user_input)
+        user_input = input("Enter new keyword: ")
+
+
