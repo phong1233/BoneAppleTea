@@ -38,10 +38,6 @@ export default class RecipeImage extends Component {
         }
 
         return (
-<<<<<<< HEAD
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center"}}>
-                <ImageApp />
-=======
             <View style={{width: 300, height: 300, flex: 1, justifyContent: "center", alignItems: "center" }}>
                 <TouchableHighlight onPress={this.onPress} activeOpacity={0}>
                     <ScrollView style={{width:300, height: 300}}
@@ -60,7 +56,6 @@ export default class RecipeImage extends Component {
                         renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
                     />
                 </TouchableHighlight>
->>>>>>> master
             </View>
         );
     }
