@@ -17,7 +17,7 @@ def get_url(item):
 
 def parse_json():
     new_data = {}
-    count = 1500
+    count = 1000
     with open('recipes_raw_nosource_ar.json') as json_file:
         data = json.load(json_file)
         recipe_id = 0
@@ -26,8 +26,6 @@ def parse_json():
                 print(str(recipe_id) + " " + d)
                 new_data[recipe_id] = data[d]
                 new_data[recipe_id]['picture_link'] = get_url(data[d]['title'])
-                ingredients = new_data[recipe_id]['ingredients']
-                new_data[recipe_id]['ingredients'] = []
                 '''c = 0
                 l = len(ingredients)
                 key_ingredients = []
