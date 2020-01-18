@@ -57,7 +57,7 @@ def parse():
             data[str(id)]['like'] = False
 
         with open('recipe_data.json', 'w') as fp:
-            json.dump(data, fp, sort_keys=True, indent=4, separators=(',', ': '))
+            json.dump(data, fp, sort_keys=False, indent=4, separators=(',', ': '))
 
 def similar_recipes():
     with open('recipe_data.json', 'r') as json_file:
@@ -73,31 +73,29 @@ def similar_recipes():
                 for word in dictionary[key]["keywords"]:
                     if word in dictionary[key2]["keywords"]:
                         count_same_words += 1
-                if count_same_words >= floor(len(dictionary[key]["keywords"]) / 2) and key2 not in dictionary[key]["keywords"]:
+                if count_same_words >= floor(len(dictionary[key]["keywords"]) / 2) and key2 not in dictionary[key]["similar_recipes"]:
                     dictionary[key]["similar_recipes"].append(key2)
                 #print(dictionary[key]["similar_recipes"])
                 if len(dictionary[key]["similar_recipes"]) == 5:
                     break
-
+            if len(dictionary[key]["similar_recipes"]) == 5:
+                continue
             for id2 in range(len(dictionary)):
                 key2 = str(id2)
                 count_same_words = 0
                 for word in dictionary[key]["keywords"]:
                     if word in dictionary[key2]["keywords"]:
                         count_same_words += 1
-                if count_same_words >= floor(len(dictionary[key]["keywords"]) / 2) and key2 not in dictionary[key]["keywords"]:
+                if count_same_words >= floor(len(dictionary[key]["keywords"]) / 2) and key2 not in dictionary[key]["similar_recipes"]:
                     dictionary[key]["similar_recipes"].append(key2)
-                #print(dictionary[key]["similar_recipes"])
+                print(dictionary[key]["similar_recipes"])
                 if len(dictionary[key]["similar_recipes"]) >= 5:
                     break
-
 
         with open('recipe_data.json', 'w') as fp:
             json.dump(dictionary, fp, sort_keys=False, indent=4, separators=(',', ': '))
 
 
-
-
 if __name__ == '__main__':
-    #parse()
+    parse()
     similar_recipes()
