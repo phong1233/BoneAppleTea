@@ -1,9 +1,10 @@
 import re
 
-def parser(recipe):
-       steps = recipe["ingredients"]
+
+def pa(recipe):
+       steps = recipe["instructions"]
        ingredients_array = re.split('\n', steps)
-       recipe["ingredients"] = ingredients_array
+       recipe["instructions"] = ingredients_array
 
 def add_keyword(new_keyword):
     file = open("keyword_file.txt", "r+")
