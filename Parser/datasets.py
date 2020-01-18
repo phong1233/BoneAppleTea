@@ -88,9 +88,12 @@ def similar_recipes():
                         count_same_words += 1
                 if count_same_words >= floor(len(dictionary[key]["keywords"]) / 2) and key2 not in dictionary[key]["similar_recipes"]:
                     dictionary[key]["similar_recipes"].append(key2)
-                print(dictionary[key]["similar_recipes"])
                 if len(dictionary[key]["similar_recipes"]) >= 5:
                     break
+        '''for id in range(len(dictionary)):
+            key = str(id)
+            print(dictionary[key]["similar_recipes"])
+            print(key)'''
 
         with open('recipe_data.json', 'w') as fp:
             json.dump(dictionary, fp, sort_keys=False, indent=4, separators=(',', ': '))
