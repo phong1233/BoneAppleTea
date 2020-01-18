@@ -1,5 +1,5 @@
 from flask import Flask, request
-from Backend.recipe_operation import send_next_10
+from recipe_operation import send_next_10
 app = Flask(__name__)
 
 

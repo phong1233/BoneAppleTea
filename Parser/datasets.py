@@ -55,6 +55,7 @@ def parse():
             complexity(data[str(id)])
             data[str(id)]['seen'] = False
             data[str(id)]['like'] = False
+            data[str(id)]['id'] = id
 
         with open('recipe_data.json', 'w') as fp:
             json.dump(data, fp, sort_keys=False, indent=4, separators=(',', ': '))
