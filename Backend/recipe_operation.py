@@ -8,5 +8,4 @@ def send_next_10():
         to_send['recipe'] = []
         for i in range(10):
             to_send['recipe'].append(data[str(i)])
-        print(to_send)
         return to_send

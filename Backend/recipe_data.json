@@ -1,6 +1,5 @@
 {
-    "recipes": [ 
-        {
+    "0": {
         "ingredients": [
             "4 skinless, boneless chicken breast halves",
             "2 tablespoons butter",
@@ -34,7 +33,7 @@
             "4"
         ]
     },
-    {
+    "1": {
         "ingredients": [
             "2 (10.75 ounce) cans condensed cream of mushroom soup",
             "1 (1 ounce) package dry onion soup mix",
@@ -69,7 +68,7 @@
             "400"
         ]
     },
-    {
+    "2": {
         "ingredients": [
             "1/2 cup packed brown sugar",
             "1/2 cup ketchup",
@@ -115,7 +114,7 @@
             "133"
         ]
     },
-    {
+    "3": {
         "ingredients": [
             "1 cup butter, softened",
             "1 cup white sugar",
@@ -163,7 +162,7 @@
             "785"
         ]
     },
-    {
+    "4": {
         "ingredients": [
             "8 ounces whole wheat rotini pasta",
             "3 cups fresh broccoli florets",
@@ -218,7 +217,7 @@
             "251"
         ]
     },
-    {
+    "5": {
         "ingredients": [
             "2 cups all-purpose flour",
             "1 teaspoon baking soda",
