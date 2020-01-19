@@ -18,18 +18,21 @@ def send_next_recipes():
 @app.route('/receive_recipes', methods=['POST'])
 def receive_recipes():
     received = request.json
+    return True
 
 @app.route('/accept', methods=['POST'])
 def accept():
     received = request.json
     dic = json.load(received)
     Backend.recipe_operation.accept(dic)
+    return True
 
 @app.route('/reject', methods=['POST'])
 def reject():
     received = request.json
     dic = json.load(received)
     Backend.recipe_operation.reject(dic)
+    return True
 
 
 if __name__ == '__main__':
