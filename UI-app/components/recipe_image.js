@@ -5,8 +5,9 @@ import FlatList from './flatlist';
 class ImageApp extends Component {
     render() {
         let pic = {
-            uri: 'https://pinchofyum.com/wp-content/uploads/Fruit-Pizza-Design-Square.jpg'
+            uri: this.props.image
         };
+        console.log(pic)
         return (
             <View>
                 <Image source={pic} style={{width: 300, height: 300, borderRadius: 15}} />
@@ -31,7 +32,7 @@ export default class RecipeImage extends Component {
             return (
                 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                     <TouchableHighlight onPress={this.onPress} activeOpacity={0}>
-                        <ImageApp />
+                        <ImageApp image={this.props.image}/>
                     </TouchableHighlight>
                 </View>
             );
