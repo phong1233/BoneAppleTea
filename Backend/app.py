@@ -1,5 +1,7 @@
 from flask import Flask, request
-from recipe_operation import send_next_10
+import json
+#from recipe_operation import send_next_10
+import Backend.recipe_operation
 app = Flask(__name__)
 
 
@@ -10,12 +12,24 @@ def base_index():
 # Returns 10 recipes
 @app.route('/send_next_recipes', methods=['GET'])
 def send_next_recipes():
-    return send()
+    return Backend.recipe_operation.send()
 
 # receive, put in databases
 @app.route('/receive_recipes', methods=['POST'])
 def receive_recipes():
     received = request.json
+
+@app.route('/accept', methods=['POST'])
+def accept():
+    received = request.json
+    dic = json.load(received)
+    Backend.recipe_operation.accept(dic)
+
+@app.route('/reject', methods=['POST'])
+def reject():
+    received = request.json
+    dic = json.load(received)
+    Backend.recipe_operation.reject(dic)
 
 
 if __name__ == '__main__':
