@@ -32,17 +32,12 @@ def send():
 def receive(dic):
     like = dic['like']
     id = dic['id']
-    to_send = {id:dic}
     if like:
         with open('recipe_like.json', 'r') as f:
-            try:
-                file = json.load(f)
-                file[str(id)] = dic
-                with open('recipe_like.json', 'a') as f1:
-                    json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
-            except:
-                with open('recipe_like.json', 'a') as f1:
-                    json.dump(to_send, f1, sort_keys=False, indent=4, separators=(',', ': '))
+            file = json.load(f)
+            file[str(id)] = dic
+            with open('recipe_like.json', 'w') as f1:
+                json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
     else:
         '''with open('recipe_dislike.json', 'r') as f:
             try:
@@ -57,8 +52,8 @@ def receive(dic):
         file = json.load(f)
         del file[str(id)]
 
-    with open('recipe_data.json', 'w') as f:
-        json.dump(file, f, sort_keys=False, indent=4, separators=(',', ': '))
+        with open('recipe_data.json', 'w') as f:
+            json.dump(file, f, sort_keys=False, indent=4, separators=(',', ': '))
 
 def reject(dic):
     with open('recipe_dislike.json', 'r') as f:
