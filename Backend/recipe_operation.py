@@ -69,7 +69,7 @@ def reject(dic):
             with open('recipe_dislike.json', 'a') as f1:
                 json.dump(dic, f1, sort_keys=False, indent=4, separators=(',', ': '))
 
-def accept():
+def accept(dic):
     with open('recipe_like.json', 'r') as f:
         try:
             file = json.load(f)
