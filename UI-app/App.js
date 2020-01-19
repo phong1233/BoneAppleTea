@@ -1,175 +1,137 @@
+'use strict';
+
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
-import RecipeContainer from './components/recipeContainer';
-import recipes from './recipe_like';
+import {StyleSheet, Text, View, Image} from 'react-native';
 
-const SCREEN_HEIGHT = Dimensions.get('window').height
-const SCREEN_WIDTH = Dimensions.get('window').width
-import Icon from 'react-native-vector-icons/Ionicons'
-const Users = recipes
+import SwipeCards from 'react-native-swipe-cards';
 
-export default class App extends React.Component {
-  constructor() {
-    super()
-
-    this.position = new Animated.ValueXY()
-    this.state = {
-      currentIndex: 0,
-      shouldUpdate: true
-    }
-
-    this.rotate = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH /2 ,0, SCREEN_WIDTH /2],
-      outputRange: ['-30deg', '0deg', '10deg'],
-      extrapolate: 'clamp'
-    })
-
-    this.rotateAndTranslate = {
-      transform: [{
-        rotate: this.rotate
-      },
-      ...this.position.getTranslateTransform()
-      ]
-    }
-
-    this.likeOpacity = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [0, 0, 1],
-      extrapolate: 'clamp'
-    })
-    this.dislikeOpacity = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [1, 0, 0],
-      extrapolate: 'clamp'
-    })
-
-    this.nextCardOpacity = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [1, 0, 1],
-      extrapolate: 'clamp'
-    })
-    this.nextCardScale = this.position.x.interpolate({
-      inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      outputRange: [1, 0.8, 1],
-      extrapolate: 'clamp'
-    })
-
-  }
-
-  UNSAFE_componentWillMount() {
-
-    this.PanResponder = PanResponder.create({
-
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onPanResponderMove: (evt, gestureState) => {
-
-        this.position.setValue({ x: gestureState.dx, y: gestureState.dy })
-      },
-      onPanResponderRelease: (evt, gestureState) => {
-
-        if (gestureState.dx > 120) {
-          Animated.spring(this.position, {
-            toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy }
-          }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
-              this.position.setValue({ x: 0, y: 0 })
-            })
-          })
-        }
-        else if (gestureState.dx < -120) {
-          Animated.spring(this.position, {
-            toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy }
-          }).start(() => {
-            this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
-              this.position.setValue({ x: 0, y: 0 })
-            })
-          })
-        }
-        else {
-          Animated.spring(this.position, {
-            toValue: { x: 0, y: 0 },
-            friction: 4
-          }).start()
-        }
-      }
-    })
-  }
-
-  renderUsers = () => {
-
-    return Users.map((item, i) => {
-
-      console.log(item);
-      if (i < this.state.currentIndex) {
-        return null
-      }
-      else if (i == this.state.currentIndex) {
-
-        return (
-          <Animated.View
-            {...this.PanResponder.panHandlers}
-            key={item.id} style={[this.rotateAndTranslate, { height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute' }]}>
-            <Animated.View style={{ opacity: this.likeOpacity, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>LIKE</Text>
-
-            </Animated.View>
-
-            <Animated.View style={{ opacity: this.dislikeOpacity, transform: [{ rotate: '30deg' }], position: 'absolute', top: 50, right: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'red', color: 'red', fontSize: 32, fontWeight: '800', padding: 10 }}>NOPE</Text>
-
-            </Animated.View>
-            <View style={{ flex: 1, height: null, width: null, resizeMode: 'cover', borderRadius: 20, backgroundColor:'white', borderWidth:5 , borderColor:'grey'}}>
-              {/* <RecipeContainer/> */}
-            </View>
-
-          </Animated.View>
-        )
-      }
-      else {
-        return (
-          <Animated.View
-
-            key={item.id} style={[{
-              opacity: this.nextCardOpacity,
-              transform: [{ scale: this.nextCardScale }],
-              height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding: 10, position: 'absolute'
-            }]}>
-            <Animated.View style={{ opacity: 0, transform: [{ rotate: '-30deg' }], position: 'absolute', top: 50, left: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'green', color: 'green', fontSize: 32, fontWeight: '800', padding: 10 }}>LIKE</Text>
-
-            </Animated.View>
-
-            <Animated.View style={{ opacity: 0, transform: [{ rotate: '30deg' }], position: 'absolute', top: 50, right: 40, zIndex: 1000 }}>
-              <Text style={{ borderWidth: 1, borderColor: 'red', color: 'red', fontSize: 32, fontWeight: '800', padding: 10 }}>NOPE</Text>
-
-            </Animated.View>
-
-            <View style={{ flex: 1, height: null, width: null, resizeMode: 'cover', borderRadius: 20, backgroundColor:'white', borderWidth:5, borderColor:'grey' }}>
-              {/* <RecipeContainer/> */}
-            </View>
-
-          </Animated.View>
-        )
-      }
-    }).reverse()
+class Card extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <View style={{ height: 60 }}>
-
-        </View>
-        <View style={{ flex: 1 }}>
-          {this.renderUsers()}
-        </View>
-        <View style={{ height: 60 }}>
-
-        </View>
-
-
+      <View style={styles.card}>
+        <Image style={styles.thumbnail} source={{uri: this.props.image}} />
+        <Text style={styles.text}>This is card {this.props.name}</Text>
       </View>
-
-    );
+    )
   }
 }
+
+class NoMoreCards extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <View style={styles.noMoreCards}>
+        <Text>No more cards</Text>
+      </View>
+    )
+  }
+}
+
+const cards = [
+  {name: '1', image: 'https://media.giphy.com/media/GfXFVHUzjlbOg/giphy.gif'},
+  {name: '2', image: 'https://media.giphy.com/media/irTuv1L1T34TC/giphy.gif'},
+  {name: '3', image: 'https://media.giphy.com/media/LkLL0HJerdXMI/giphy.gif'},
+  {name: '4', image: 'https://media.giphy.com/media/fFBmUMzFL5zRS/giphy.gif'},
+  {name: '5', image: 'https://media.giphy.com/media/oDLDbBgf0dkis/giphy.gif'},
+  {name: '6', image: 'https://media.giphy.com/media/7r4g8V2UkBUcw/giphy.gif'},
+  {name: '7', image: 'https://media.giphy.com/media/K6Q7ZCdLy8pCE/giphy.gif'},
+  {name: '8', image: 'https://media.giphy.com/media/hEwST9KM0UGti/giphy.gif'},
+  {name: '9', image: 'https://media.giphy.com/media/3oEduJbDtIuA2VrtS0/giphy.gif'},
+]
+
+const cards2 = [
+  {name: '10', image: 'https://media.giphy.com/media/12b3E4U9aSndxC/giphy.gif'},
+  {name: '11', image: 'https://media4.giphy.com/media/6csVEPEmHWhWg/200.gif'},
+  {name: '12', image: 'https://media4.giphy.com/media/AA69fOAMCPa4o/200.gif'},
+  {name: '13', image: 'https://media.giphy.com/media/OVHFny0I7njuU/giphy.gif'},
+]
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: cards,
+      outOfCards: false
+    }
+  }
+
+  handleYup (card) {
+    console.log("yup")
+  }
+
+  handleNope (card) {
+    console.log("nope")
+  }
+
+  cardRemoved (index) {
+    console.log(`The index is ${index}`);
+
+    let CARD_REFRESH_LIMIT = 3
+
+    if (this.state.cards.length - index <= CARD_REFRESH_LIMIT + 1) {
+      console.log(`There are only ${this.state.cards.length - index - 1} cards left.`);
+
+      if (!this.state.outOfCards) {
+        console.log(`Adding ${cards2.length} more cards`)
+
+        this.setState({
+          cards: this.state.cards.concat(cards2),
+          outOfCards: true
+        })
+      }
+
+    }
+
+  }
+
+  render() {
+    return (
+      <SwipeCards
+        cards={this.state.cards}
+        loop={false}
+
+        renderCard={(cardData) => <Card {...cardData} />}
+        renderNoMoreCards={() => <NoMoreCards />}
+        showYup={true}
+        showNope={true}
+
+        handleYup={this.handleYup}
+        handleNope={this.handleNope}
+        cardRemoved={this.cardRemoved.bind(this)}
+      />
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  card: {
+    alignItems: 'center',
+    borderRadius: 5,
+    overflow: 'hidden',
+    borderColor: 'grey',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    elevation: 1,
+  },
+  thumbnail: {
+    width: 300,
+    height: 300,
+  },
+  text: {
+    fontSize: 20,
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  noMoreCards: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+})
