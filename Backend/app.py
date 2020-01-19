@@ -24,7 +24,7 @@ def receive_recipes():
 def accept():
     received = request.json
     dic = json.load(received)
-    list(dic.values())[0]['like'] = True
+    dic["like"] = True
     Backend.recipe_operation.receive(dic)
     return True
 
@@ -32,7 +32,7 @@ def accept():
 def reject():
     received = request.json
     dic = json.load(received)
-    list(dic.values())[0]['like'] = False
+    dic['like'] = False
     Backend.recipe_operation.receive(dic)
     return True
 

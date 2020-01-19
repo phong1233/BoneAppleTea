@@ -30,8 +30,8 @@ def send():
 
 
 def receive(dic):
-    like = list(dic.values())[0]['like']
-    id = list(dic.values())[0]['id']
+    like = dic['like']
+    id = dic['id']
     if like:
         with open('recipe_like.json', 'r') as f:
             try:
