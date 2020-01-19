@@ -15,14 +15,15 @@ def reset_like():
 
 
 def send_next_10():
-    with open('recipe_data.json', 'r') as f:
+    with open('original_recipe_data.json', 'r') as f:
         data = json.load(f)
         to_send = {}
         to_send['recipe'] = []
-        for i in range(10):
+        for i in range(len(data)):
             to_send['recipe'].append(data[str(i)])
-        return to_send
 
+        with open('recipe_like.json', 'w') as f:
+            json.dump(to_send, f, indent=4, separators=(',', ': '))
 
 def receive(dic):
     like = list(dic.values())[0]['like']
@@ -86,4 +87,4 @@ dic = {
             "4"
         ]
     }}
-receive(dic)
+send_next_10()
