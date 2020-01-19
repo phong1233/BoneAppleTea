@@ -1,22 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
 import RecipeContainer from './components/recipeContainer';
+import recipes from './recipe_like';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
 import Icon from 'react-native-vector-icons/Ionicons'
-let Users = []
-fetch('http://localhost:5000/send_next_recipes', {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        // console.log(responseJson);
-        Users = responseJson['recipe'];
-      })
-      .catch(error => {
-        console.error(error);
-});
+const Users = recipes
 
 export default class App extends React.Component {
   constructor() {
@@ -65,32 +55,8 @@ export default class App extends React.Component {
     })
 
   }
-  // componentDidMount = () => {
-  //   fetch('http://localhost:5000/send_next_recipes', {
-  //     method: 'GET',
-  //   })
-  //     .then(response => response.json())
-  //     .then(responseJson => {
-  //       // console.log(responseJson);
-  //       Users = responseJson['recipe'];
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // };
 
   UNSAFE_componentWillMount() {
-    fetch('http://localhost:5000/send_next_recipes', {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        // console.log(responseJson);
-        Users = responseJson['recipe'];
-      })
-      .catch(error => {
-        console.error(error);
-      });
 
     this.PanResponder = PanResponder.create({
 
