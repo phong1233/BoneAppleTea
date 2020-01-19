@@ -29,8 +29,8 @@ make start-ui
 
 ##  Examples
 
-![Alt Text](`https://github.com/phong1233/BoneAppleTea/blob/master/Documentation/example1.gif`)
-![Alt Text](`https://github.com/phong1233/BoneAppleTea/blob/master/Documentation/example2.gif`)
+![Alt Text](example1.gif)
+![Alt Text](example2.gif)
 
 
 ## Contributors
