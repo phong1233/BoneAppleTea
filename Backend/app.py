@@ -22,9 +22,8 @@ def receive_recipes():
 @app.route('/accept', methods=['POST'])
 def accept():
     dic = request.json
-    to_send = dic
-    to_send["like"] = True
-    recipe_operation.receive(to_send)
+
+    recipe_operation.accept(dic)
     return "Good"
 
 @app.route('/reject', methods=['POST'])

@@ -66,17 +66,13 @@ def reject(dic):
             with open('recipe_dislike.json', 'a') as f1:
                 json.dump(dic, f1, sort_keys=False, indent=4, separators=(',', ': '))
 
-def accept():
+
+def accept(dic):
     with open('recipe_like.json', 'r') as f:
-        try:
-            dic = request.json
-            dic = json.load(dic)
-            file = json.load(f)
-            file.update(dic)
-            with open('recipe_like.json', 'a') as f1:
-                json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
-        except:
-            with open('recipe_like.json', 'a') as f1:
-                json.dump(dic, f1, sort_keys=False, indent=4, separators=(',', ': '))
+        file = json.load(f)
+        file[str(dic['id'])] = dic
+    with open('recipe_like.json', 'w') as f1:
+        json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
+
 
 start_database()
