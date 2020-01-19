@@ -68,11 +68,16 @@ def reject(dic):
 
 
 def accept(dic):
-    with open('recipe_like.json', 'r') as f:
-        file = json.load(f)
-        file[str(dic['id'])] = dic
-    with open('recipe_like.json', 'w') as f1:
-        json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
+    try:
+        with open('recipe_like.json', 'r') as f:
+            file = json.load(f)
+            file[str(dic['id'])] = dic
+        with open('recipe_like.json', 'w') as f1:
+            json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
+    except:
+        with open('recipe_like.json', 'w') as f1:
+            json.dump(dic, f1, sort_keys=False, indent=4, separators=(',', ': '))
+
 
 def get_like():
     to_send = {'recipe': []}
