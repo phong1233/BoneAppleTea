@@ -10,7 +10,7 @@ def base_index():
 # Returns 10 recipes
 @app.route('/send_next_recipes', methods=['GET'])
 def send_next_recipes():
-    return send_next_10()
+    return send()
 
 # receive, put in databases
 @app.route('/receive_recipes', methods=['POST'])

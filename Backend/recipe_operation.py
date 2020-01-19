@@ -17,11 +17,7 @@ def reset_like():
 def send():
     with open('recipe_data.json', 'r') as f:
         data = json.load(f)
-        to_send = {}
-        to_send['recipe'] = []
-        for i in range(len(data)):
-            to_send['recipe'].append(data[str(i)])
-        return to_send
+        return data[str(0)]
 
 
 def receive(dic):
