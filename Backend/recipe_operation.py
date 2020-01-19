@@ -19,13 +19,11 @@ def send():
         data = json.load(f)
         to_send = {}
         to_send['recipe'] = []
-        for i in range(len(data)):
+        for i in range(10):
             to_send['recipe'].append(data[str(i)])
-            with open('recipe_data.json', 'r') as f1:
-                file = json.load(f1)
-                del file[str(i)]
-            with open('recipe_data.json', 'w') as f1:
-                json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
+            del data[str(i)]
+        with open('recipe_data.json', 'w') as f1:
+            json.dump(data, f1, sort_keys=False, indent=4, separators=(',', ': '))
         return to_send
 
 
