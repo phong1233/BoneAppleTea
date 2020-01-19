@@ -14,12 +14,12 @@ def reset_like():
     open('recipe_dislike.json', 'w').close()
 
 
-def send_next_10():
+def send():
     with open('recipe_data.json', 'r') as f:
         data = json.load(f)
         to_send = {}
         to_send['recipe'] = []
-        for i in range(10):
+        for i in range(len(data)):
             to_send['recipe'].append(data[str(i)])
         return to_send
 
