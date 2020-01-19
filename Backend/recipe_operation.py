@@ -24,7 +24,7 @@ def send():
             with open('recipe_data.json', 'r') as f1:
                 file = json.load(f1)
                 del file[str(i)]
-            with open('recipe_data.json', 'a') as f1:
+            with open('recipe_data.json', 'w') as f1:
                 json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
         return to_send
 
