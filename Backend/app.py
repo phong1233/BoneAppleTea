@@ -24,16 +24,17 @@ def receive_recipes():
 def accept():
     received = request.json
     dic = json.load(received)
-    Backend.recipe_operation.accept(dic)
+    list(dic.values())[0]['like'] = True
+    Backend.recipe_operation.receive(dic)
     return True
 
 @app.route('/reject', methods=['POST'])
 def reject():
     received = request.json
     dic = json.load(received)
-    Backend.recipe_operation.reject(dic)
+    list(dic.values())[0]['like'] = False
+    Backend.recipe_operation.receive(dic)
     return True
-
 
 if __name__ == '__main__':
     app.run()
