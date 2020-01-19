@@ -75,7 +75,7 @@ def similar_recipes():
                     if word in dictionary[key2]["keywords"]:
                         count_same_words += 1
                 if count_same_words >= floor(len(dictionary[key]["keywords"]) / 2) and key2 not in dictionary[key]["similar_recipes"]:
-                    dictionary[key]["similar_recipes"].append(key2)
+                    dictionary[key]["similar_recipes"].append(dictionary[key2]['picture_link'])
                 #print(dictionary[key]["similar_recipes"])
                 if len(dictionary[key]["similar_recipes"]) == 5:
                     break
@@ -88,7 +88,7 @@ def similar_recipes():
                     if word in dictionary[key2]["keywords"]:
                         count_same_words += 1
                 if count_same_words >= floor(len(dictionary[key]["keywords"]) / 2) and key2 not in dictionary[key]["similar_recipes"]:
-                    dictionary[key]["similar_recipes"].append(key2)
+                    dictionary[key]["similar_recipes"].append(dictionary[key2]['picture_link'])
                 if len(dictionary[key]["similar_recipes"]) >= 5:
                     break
         '''for id in range(len(dictionary)):

@@ -74,5 +74,13 @@ def accept(dic):
     with open('recipe_like.json', 'w') as f1:
         json.dump(file, f1, sort_keys=False, indent=4, separators=(',', ': '))
 
+def get_like():
+    to_send = {'recipe': []}
+    with open('recipe_like.json', 'r') as f:
+        file = json.load(f)
+        for data in file:
+            to_send['recipe'].append(data)
+    return to_send
+
 
 start_database()

@@ -34,6 +34,10 @@ def reject():
     recipe_operation.receive(dic)
     return True
 
+@app.route('/like', methods=['GET'])
+def like():
+    return recipe_operation.get_like()
+
 if __name__ == '__main__':
     recipe_operation.start_database()
 
